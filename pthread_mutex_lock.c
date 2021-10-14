@@ -40,10 +40,10 @@
  *      59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
 
+#include "pthread.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "pthread.h"
 #include "implement.h"
 
 

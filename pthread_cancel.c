@@ -41,8 +41,8 @@
  */
 
 #include "pthread.h"
-#include "implement.h"
 #include <stdio.h>
+#include "implement.h"
 
 int
 pthread_cancel (pthread_t thread)

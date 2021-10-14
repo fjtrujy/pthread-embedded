@@ -4,7 +4,7 @@ CLEANUP_TYPE=C
 
 VPATH = ../..:../helper
 
-TARGET_LIB = libpthread-psp.a
+TARGET_LIB = libpthread.a
 
 
 MUTEX_OBJS = \
@@ -46,6 +46,8 @@ THREAD_OBJS = \
   pte_callUserDestroyRoutines.o \
   pte_tkAssocDestroy.o \
   pthread_kill.o \
+  pthread_sigmask.o \
+  pthread_atfork.o \
   pthread_attr_destroy.o \
   pthread_attr_getdetachstate.o \
   pthread_attr_getinheritsched.o \
@@ -62,6 +64,10 @@ THREAD_OBJS = \
   pthread_attr_setscope.o \
   pthread_attr_setstackaddr.o \
   pthread_attr_setstacksize.o \
+  pthread_attr_getstack.o \
+  pthread_attr_setstack.o \
+  pthread_attr_getguardsize.o \
+  pthread_attr_setguardsize.o \
   pte_is_attr.o \
   pthread_exit.o \
   pthread_getschedparam.o \
@@ -131,7 +137,9 @@ CONDVAR_OBJS = \
   pthread_condattr_destroy.o \
   pthread_condattr_getpshared.o \
   pthread_condattr_init.o \
-  pthread_condattr_setpshared.o
+  pthread_condattr_setpshared.o \
+  pthread_condattr_getclock.o \
+  pthread_condattr_setclock.o
 
 RWLOCK_OBJS = \
   pthread_rwlock_init.o \
@@ -161,21 +169,16 @@ OS_OBJS = \
 
 OBJS = $(MUTEX_OBJS) $(MUTEXATTR_OBJS) $(THREAD_OBJS) $(SUPPORT_OBJS) $(TLS_OBJS) $(MISC_OBJS) $(SEM_OBJS) $(BARRIER_OBJS) $(SPIN_OBJS) $(CONDVAR_OBJS) $(RWLOCK_OBJS) $(CANCEL_OBJS) $(OS_OBJS)
 
-INCDIR = 
-CFLAGS = $(GLOBAL_CFLAGS) -G0 -O2 -Wall -g -fno-strict-aliasing -I../.. -I../helper 
-CXXFLAGS = $(CFLAGS) -fexceptions -fno-rtti -Werror -D__CLEANUP_CXX
-ASFLAGS = $(CFLAGS)
 
-LDFLAGS = 
-LIBS = 
+PSPSDK = $(shell psp-config --pspsdk-path)
+PREFIX ?= $(shell psp-config --psp-prefix)
+CC = psp-gcc
+CXX = psp-g++
+AR = psp-ar
 
-PSPSDK=$(shell psp-config --pspsdk-path)
-include $(PSPSDK)/lib/build.mak
-
+CFLAGS = $(GLOBAL_CFLAGS) -G0 -Wall -O3 -Werror -D_POSIX_THREADS_INTERNAL -ffat-lto-objects -flto -I. -I../..  -I../helper -I$(PSPSDK)/include
 
 ifeq ($(CLEANUP_TYPE),CPPXX)
-
-CC=psp-g++
 
 pte_throw.o: pte_throw.c
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(INCLUDES) $(TARGET_ARCH) \
@@ -187,8 +190,22 @@ pte_threadStart.o: pte_threadStart.c
 
 endif
 
-install: $(TARGET_LIB)
-	@cp -v $(TARGET_LIB) `psp-config --psp-prefix`/lib
-	@cp -v *.h `psp-config --psp-prefix`/include
-	@echo "Done."
+$(TARGET_LIB): $(OBJS)
+	$(AR) -rc $@ $^
 
+all: $(TARGET_LIB)
+
+clean:
+	rm -rf $(TARGET_LIB) $(OBJS)
+
+install: $(TARGET_LIB)
+	@install -d $(DESTDIR)$(PREFIX)/lib
+	@install -m644 $(TARGET_LIB) $(PREFIX)$(PSPDIR)/lib
+	@install -d $(DESTDIR)$(PREFIX)/include
+	@install -m644 pte_types.h $(DESTDIR)$(PREFIX)/include
+	@install -m644 ../../pthread_public.h $(DESTDIR)$(PREFIX)/include/pthread.h
+	@install -m644 ../../sched.h $(DESTDIR)$(PREFIX)/include/
+	@install -m644 ../../sys/_pthreadtypes.h $(DESTDIR)$(PREFIX)/include/sys/
+	@install -m644 ../../sys/sched.h $(DESTDIR)$(PREFIX)/include/sys/
+	@install -m644 ../../bits/posix_opt.h $(DESTDIR)$(PREFIX)/include/bits/
+	@install -m644 ../../semaphore.h $(DESTDIR)$(PREFIX)/include/

@@ -27,12 +27,14 @@
  */
 
 
+#include "pthread.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <pspkerror.h>
+#include <pspthreadman.h>
+#include <pspsdk.h>
 #include "pte_osal.h"
-#include "pthread.h"
 #include "tls-helper.h"
 
 /* For ftime */
@@ -889,9 +891,7 @@ void * pte_osTlsGetValue(unsigned int index)
 
 pte_osResult pte_osTlsAlloc(unsigned int *pKey)
 {
-  void * pTls;
-
-  pTls = getTlsStructFromThread(sceKernelGetThreadId());
+  getTlsStructFromThread(sceKernelGetThreadId());
 
   return pteTlsAlloc(pKey);
 

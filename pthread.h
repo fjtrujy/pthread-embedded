@@ -45,6 +45,8 @@
 #define PTHREAD_INTERNAL_H
 
 #define PTE_INTERNAL
+#include "bits/posix_opt.h"
+#include "sys/_pthreadtypes.h"
 #include "pthread_public.h"
 #undef PTE_INTERNAL
 
