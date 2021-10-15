@@ -16,7 +16,6 @@
 #define _POSIX_PRIORITY_SCHEDULING              1
 #define _POSIX_TIMEOUTS                         1
 #define _UNIX98_THREAD_MUTEX_ATTRIBUTES         1
-#define _POSIX_MONOTONIC_CLOCK                  200112L
 #define _POSIX_TIMERS                           1
 
 
