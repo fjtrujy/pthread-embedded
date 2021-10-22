@@ -205,7 +205,9 @@ install: $(TARGET_LIB)
 	@install -m644 pte_types.h $(DESTDIR)$(PREFIX)/include
 	@install -m644 ../../pthread_public.h $(DESTDIR)$(PREFIX)/include/pthread.h
 	@install -m644 ../../sched.h $(DESTDIR)$(PREFIX)/include/
+	@install -d $(DESTDIR)$(PREFIX)/include/sys
 	@install -m644 ../../sys/_pthreadtypes.h $(DESTDIR)$(PREFIX)/include/sys/
 	@install -m644 ../../sys/sched.h $(DESTDIR)$(PREFIX)/include/sys/
+	@install -d $(DESTDIR)$(PREFIX)/include/bits
 	@install -m644 ../../bits/posix_opt.h $(DESTDIR)$(PREFIX)/include/bits/
 	@install -m644 ../../semaphore.h $(DESTDIR)$(PREFIX)/include/
