@@ -171,7 +171,7 @@ OBJS = $(MUTEX_OBJS) $(MUTEXATTR_OBJS) $(THREAD_OBJS) $(SUPPORT_OBJS) $(TLS_OBJS
 
 
 PSPSDK = $(shell psp-config --pspsdk-path)
-PREFIX ?= $(shell psp-config --psp-prefix)
+DESTDIR ?= $(shell psp-config --psp-prefix)
 CC = psp-gcc
 CXX = psp-g++
 AR = psp-ar
@@ -199,15 +199,15 @@ clean:
 	rm -rf $(TARGET_LIB) $(OBJS)
 
 install: $(TARGET_LIB)
-	@install -d $(DESTDIR)$(PREFIX)/lib
-	@install -m644 $(TARGET_LIB) $(PREFIX)$(PSPDIR)/lib
-	@install -d $(DESTDIR)$(PREFIX)/include
-	@install -m644 pte_types.h $(DESTDIR)$(PREFIX)/include
-	@install -m644 ../../pthread_public.h $(DESTDIR)$(PREFIX)/include/pthread.h
-	@install -m644 ../../sched.h $(DESTDIR)$(PREFIX)/include/
-	@install -d $(DESTDIR)$(PREFIX)/include/sys
-	@install -m644 ../../sys/_pthreadtypes.h $(DESTDIR)$(PREFIX)/include/sys/
-	@install -m644 ../../sys/sched.h $(DESTDIR)$(PREFIX)/include/sys/
-	@install -d $(DESTDIR)$(PREFIX)/include/bits
-	@install -m644 ../../bits/posix_opt.h $(DESTDIR)$(PREFIX)/include/bits/
-	@install -m644 ../../semaphore.h $(DESTDIR)$(PREFIX)/include/
+	@install -d $(DESTDIR)/lib
+	@install -m644 $(TARGET_LIB) $(DESTDIR)/lib
+	@install -d $(DESTDIR)/include
+	@install -m644 pte_types.h $(DESTDIR)/include
+	@install -m644 ../../pthread_public.h $(DESTDIR)/include/pthread.h
+	@install -m644 ../../sched.h $(DESTDIR)/include/
+	@install -d $(DESTDIR)/include/sys
+	@install -m644 ../../sys/_pthreadtypes.h $(DESTDIR)/include/sys/
+	@install -m644 ../../sys/sched.h $(DESTDIR)/include/sys/
+	@install -d $(DESTDIR)/include/bits
+	@install -m644 ../../bits/posix_opt.h $(DESTDIR)/include/bits/
+	@install -m644 ../../semaphore.h $(DESTDIR)/include/
