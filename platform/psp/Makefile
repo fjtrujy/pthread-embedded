@@ -163,20 +163,15 @@ CANCEL_OBJS = \
   pthread_setcanceltype.o \
   pthread_setcancelstate.o
 
-OS_OBJS = \
-  psp_osal.o \
-  tls-helper.o
-
-OBJS = $(MUTEX_OBJS) $(MUTEXATTR_OBJS) $(THREAD_OBJS) $(SUPPORT_OBJS) $(TLS_OBJS) $(MISC_OBJS) $(SEM_OBJS) $(BARRIER_OBJS) $(SPIN_OBJS) $(CONDVAR_OBJS) $(RWLOCK_OBJS) $(CANCEL_OBJS) $(OS_OBJS)
+OBJS = $(MUTEX_OBJS) $(MUTEXATTR_OBJS) $(THREAD_OBJS) $(SUPPORT_OBJS) $(TLS_OBJS) $(MISC_OBJS) $(SEM_OBJS) $(BARRIER_OBJS) $(SPIN_OBJS) $(CONDVAR_OBJS) $(RWLOCK_OBJS) $(CANCEL_OBJS)
 
 
-PSPSDK = $(shell psp-config --pspsdk-path)
 DESTDIR ?= $(shell psp-config --psp-prefix)
 CC = psp-gcc
 CXX = psp-g++
 AR = psp-ar
 
-CFLAGS = $(GLOBAL_CFLAGS) -G0 -Wall -O3 -Werror -D_POSIX_THREADS_INTERNAL -ffat-lto-objects -flto -I. -I../..  -I../helper -I$(PSPSDK)/include
+CFLAGS = $(GLOBAL_CFLAGS) -G0 -Wall -O3 -Werror -D_POSIX_THREADS_INTERNAL -ffat-lto-objects -flto -I. -I../..  -I../helper
 
 ifeq ($(CLEANUP_TYPE),CPPXX)
 
