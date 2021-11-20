@@ -87,6 +87,8 @@ void pthread_terminate(void)
       pte_osMutexUnlock(pte_thread_reuse_lock);
 
       pte_processInitialized = PTE_FALSE;
+
+      pte_osTerminate();
     }
 
 }

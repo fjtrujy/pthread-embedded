@@ -193,7 +193,7 @@ enum
 };
 
 
-typedef unsigned int pthread_t_;
+// typedef unsigned int pthread_t_;
 
     /*
      * ====================

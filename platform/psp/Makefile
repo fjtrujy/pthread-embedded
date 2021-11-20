@@ -166,12 +166,12 @@ CANCEL_OBJS = \
 OBJS = $(MUTEX_OBJS) $(MUTEXATTR_OBJS) $(THREAD_OBJS) $(SUPPORT_OBJS) $(TLS_OBJS) $(MISC_OBJS) $(SEM_OBJS) $(BARRIER_OBJS) $(SPIN_OBJS) $(CONDVAR_OBJS) $(RWLOCK_OBJS) $(CANCEL_OBJS)
 
 
-DESTDIR ?= $(shell psp-config --psp-prefix)
+DESTDIR ?= $(PSPDEV)/psp
 CC = psp-gcc
 CXX = psp-g++
 AR = psp-ar
 
-CFLAGS = $(GLOBAL_CFLAGS) -G0 -Wall -O3 -Werror -D_POSIX_THREADS_INTERNAL -ffat-lto-objects -flto -I. -I../..  -I../helper
+CFLAGS = $(GLOBAL_CFLAGS) -G0 -Wall -O3 -Werror -ffat-lto-objects -flto -I. -I../..  -I../helper
 
 ifeq ($(CLEANUP_TYPE),CPPXX)
 
@@ -203,6 +203,7 @@ install: $(TARGET_LIB)
 	@install -d $(DESTDIR)/include/sys
 	@install -m644 ../../sys/_pthreadtypes.h $(DESTDIR)/include/sys/
 	@install -m644 ../../sys/sched.h $(DESTDIR)/include/sys/
+	@install -m644 ../../pte_generic_osal.h $(DESTDIR)/include/sys/
 	@install -d $(DESTDIR)/include/bits
 	@install -m644 ../../bits/posix_opt.h $(DESTDIR)/include/bits/
 	@install -m644 ../../semaphore.h $(DESTDIR)/include/

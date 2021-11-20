@@ -27,11 +27,7 @@
  *  2.5 Primitive System Data Types,  P1003.1c/D10, p. 19.
  */
 
-#ifdef _POSIX_THREADS_INTERNAL
 typedef struct pthread_t_ * pthread_t;            /* identify a thread */
-#else
-typedef __uint32_t pthread_t;            /* identify a thread */
-#endif
 
 /* P1003.1c/D10, p. 118-119 */
 #define PTHREAD_SCOPE_PROCESS 0

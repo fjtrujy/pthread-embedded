@@ -66,6 +66,13 @@ typedef enum pte_osResult
 pte_osResult pte_osInit(void);
 //@}
 
+/**
+ * Provides a hook for the OSAL to implement any OS specific deinitialization.  This is guaranteed to be
+ * called after any other OSAL function deinit.
+ */
+pte_osResult pte_osTerminate(void);
+//@}
+
 /** @name Mutexes */
 //@{
 
