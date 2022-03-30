@@ -18,10 +18,10 @@
 #ifndef _SYS__PTHREADTYPES_H_
 #define	_SYS__PTHREADTYPES_H_
 
-#if defined(_POSIX_THREADS) || __POSIX_VISIBLE >= 199506
-
-#include <sys/sched.h>
 #include <bits/posix_opt.h>
+#include <sys/sched.h>
+
+#if defined(_POSIX_THREADS) || __POSIX_VISIBLE >= 199506
 
 /*
  *  2.5 Primitive System Data Types,  P1003.1c/D10, p. 19.
