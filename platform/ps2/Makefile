@@ -168,6 +168,8 @@ OBJS = $(MUTEX_OBJS) $(MUTEXATTR_OBJS) $(THREAD_OBJS) $(SUPPORT_OBJS) $(TLS_OBJS
 
 CPU_TARGET = mips64r5900el-ps2-elf
 DESTDIR ?= $(PS2DEV)/ee/$(CPU_TARGET)
+INCLUDE_DIR = include
+
 CC = $(CPU_TARGET)-gcc
 CXX = $(CPU_TARGET)-c++
 AR = $(CPU_TARGET)-ar
@@ -197,15 +199,14 @@ clean:
 install: $(TARGET_LIB)
 	@install -d $(DESTDIR)/lib
 	@install -m644 $(TARGET_LIB) $(DESTDIR)/lib
-	@install -d $(DESTDIR)/include
-	@install -m644 pte_types.h $(DESTDIR)/include
-	@install -m644 ../../pthread_public.h $(DESTDIR)/include/pthread.h
-	@install -m644 ../../sched.h $(DESTDIR)/include/
-	@install -d $(DESTDIR)/include/sys
-	@install -m644 ../../sys/_pthreadtypes.h $(DESTDIR)/include/sys/
-	@install -m644 ../../sys/sched.h $(DESTDIR)/include/sys/
-	@install -m644 ../../pte_generic_osal.h $(DESTDIR)/include/sys/
-	@install -d $(DESTDIR)/include/bits
-	@install -m644 ../../bits/posix_opt.h $(DESTDIR)/include/bits/
-	@install -m644 ../../semaphore.h $(DESTDIR)/include/
-  
+	@install -d $(DESTDIR)/$(INCLUDE_DIR)
+	@install -m644 pte_types.h $(DESTDIR)/$(INCLUDE_DIR)
+	@install -m644 ../../pthread_public.h $(DESTDIR)/$(INCLUDE_DIR)/pthread.h
+	@install -m644 ../../sched.h $(DESTDIR)/$(INCLUDE_DIR)/
+	@install -d $(DESTDIR)/$(INCLUDE_DIR)/sys
+	@install -m644 ../../sys/_pthreadtypes.h $(DESTDIR)/$(INCLUDE_DIR)/sys/
+	@install -m644 ../../sys/sched.h $(DESTDIR)/$(INCLUDE_DIR)/sys/
+	@install -m644 ../../pte_generic_osal.h $(DESTDIR)/$(INCLUDE_DIR)/sys/
+	@install -d $(DESTDIR)/$(INCLUDE_DIR)/bits
+	@install -m644 ../../bits/posix_opt.h $(DESTDIR)/$(INCLUDE_DIR)/bits/
+	@install -m644 ../../semaphore.h $(DESTDIR)/$(INCLUDE_DIR)/
