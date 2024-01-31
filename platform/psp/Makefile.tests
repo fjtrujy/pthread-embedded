@@ -171,7 +171,7 @@ OBJS = $(MUTEX_TEST_OBJS) $(MISC_OBJS) $(MISC_TEST_OBJS) $(THREAD_TEST_OBJS) $(S
 
 
 INCDIR = 
-CFLAGS = $(GLOBAL_CFLAGS) -O2 -Wall -g -I..  -fno-strict-aliasing  -I../.. -G0
+CFLAGS = $(GLOBAL_CFLAGS) -O2 -mno-gpopt -Wall -g -I..  -fno-strict-aliasing  -I../..
 CXXFLAGS = $(CFLAGS) -fexceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 
