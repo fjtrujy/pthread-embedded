@@ -95,7 +95,6 @@ THREAD_TEST_OBJS = \
   exit4.o \
   exit5.o \
   reuse1.o \
-  reuse2.o \
   priority1.o \
   priority2.o \
   inherit1.o
@@ -176,13 +175,29 @@ CXXFLAGS = $(CFLAGS) -fexceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 
 LDFLAGS = -L../..
-LIBS = -lc -lpthread-2 -lstdc++
+# LIBS = -lc -lpthread-2 -lstdc++
 
 ifeq ($(CLEANUP_TYPE),CPPXX)
 
 LIBS += -lstdc++
 
 endif
+
+EE_OBJS += $(OBJS)
+
+EE_CFLAGS = $(CFLAGS)
+EE_CXXFLAGS = $(CFLAGS)
+EE_LDFLAGS = $(LDFLAGS)
+EE_LIBS = $(LIBS)
+EE_ASFLAGS = $(ASFLAGS)
+EE_INCS = $(INCDIR)
+EE_BIN = $(TARGET).elf
+EE_GPVAL = $(GPVAL)
+
+all: $(EE_BIN)
+
+clean:
+	rm -f $(EE_BIN) $(EE_OBJS)
 
 #Include preferences
 include $(PS2SDK)/samples/Makefile.pref
@@ -206,8 +221,8 @@ exception3.o: exception3.c
 endif
 
 
-install: $(TARGET_LIB)
-	@cp -v $(TARGET_LIB) `ps2-config --ps2-prefix`/lib
-	@cp -v *.h `ps2-config --ps2-prefix`/include
-	@echo "Done."
+# install: $(TARGET_LIB)
+# 	@cp -v $(TARGET_LIB) `ps2-config --ps2-prefix`/lib
+# 	@cp -v *.h `ps2-config --ps2-prefix`/include
+# 	@echo "Done."
 

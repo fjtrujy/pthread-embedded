@@ -44,6 +44,8 @@
 #ifndef _PTHREAD_TEST_H_
 #define _PTHREAD_TEST_H_
 
+#define OS_MAX_SIMUL_THREADS 10
+
 #include <stdio.h>
 #include <stdlib.h>
 
