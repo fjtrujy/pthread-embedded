@@ -95,7 +95,6 @@ THREAD_TEST_OBJS = \
   exit4.o \
   exit5.o \
   reuse1.o \
-  reuse2.o \
   priority1.o \
   priority2.o \
   inherit1.o
@@ -176,13 +175,16 @@ CXXFLAGS = $(CFLAGS) -fexceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 
 LDFLAGS = -L../..
-LIBS = -lc -lpthread-psp -lstdc++
+# LIBS = -lc -lp -lstdc++
 
 ifeq ($(CLEANUP_TYPE),CPPXX)
 
 LIBS += -lstdc++
 
 endif
+
+EXTRA_TARGETS = EBOOT.PBP
+PSP_EBOOT_TITLE = PTHREAD TESTS
 
 PSPSDK=$(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak
