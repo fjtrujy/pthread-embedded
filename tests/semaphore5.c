@@ -85,7 +85,9 @@ thr (void * arg)
 
   abstime.tv_sec += 5;
   assert(sem_timedwait(&s, &abstime) == -1);
+#ifdef THREAD_SAFE_ERRNO
   assert(errno == ETIMEDOUT);
+#endif
 
   return NULL;
 }

@@ -95,7 +95,9 @@ thr (void * arg)
       // We expect this thread to be cancelled,
       // so sem_wait should return EINTR.
       assert(sem_wait(&s) == -1);
+#ifdef THREAD_SAFE_ERRNO
       assert(errno == EINTR);
+#endif
     }
   else
     {

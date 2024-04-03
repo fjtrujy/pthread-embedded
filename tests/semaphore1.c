@@ -89,11 +89,13 @@ thr(void * arg)
 
   assert((result = sem_trywait(&s)) == -1);
 
+#ifdef THREAD_SAFE_ERRNO
   if ( result == -1 )
     {
       int err = errno;
       assert(err == EAGAIN);
     }
+#endif
 
   assert((result = sem_post(&s)) == 0);
 
@@ -121,11 +123,13 @@ int pthread_test_semaphore1(void)
 
   assert((result = sem_trywait(&s)) == -1);
 
+#ifdef THREAD_SAFE_ERRNO
   if ( result == -1 )
     {
       int err = errno;
       assert(err == EAGAIN);
     }
+#endif
 
   assert((result = sem_post(&s)) == 0);
 

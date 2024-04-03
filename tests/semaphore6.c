@@ -87,7 +87,9 @@ thr (void * arg)
 
   abstime.tv_sec += 5;
   assert(sem_timedwait(&s, &abstime) == -1);
+#ifdef THREAD_SAFE_ERRNO
   assert(errno == ETIMEDOUT);
+#endif
 
   semStatus = 1;
   //  assert(pthread_detach(pthread_self()) == 0);
