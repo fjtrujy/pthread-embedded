@@ -171,7 +171,7 @@ CC = psp-gcc
 CXX = psp-g++
 AR = psp-ar
 
-CFLAGS = $(GLOBAL_CFLAGS) -G0 -Wall -O3 -Werror -ffat-lto-objects -flto -I. -I../..  -I../helper
+CFLAGS = $(GLOBAL_CFLAGS) -mno-gpopt -Wall -O3 -Werror -ffat-lto-objects -flto -I. -I../..  -I../helper
 
 ifeq ($(CLEANUP_TYPE),CPPXX)
 
