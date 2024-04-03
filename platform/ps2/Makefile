@@ -174,7 +174,7 @@ CC = $(CPU_TARGET)-gcc
 CXX = $(CPU_TARGET)-c++
 AR = $(CPU_TARGET)-ar
 
-CFLAGS = $(GLOBAL_CFLAGS) -G0 -Wall -O3 -Werror -ffat-lto-objects -flto -I. -I../..  -I../helper
+CFLAGS = $(GLOBAL_CFLAGS) -G0 -Wall -O3 -Werror -gdwarf-2 -gz -ffat-lto-objects -flto -I. -I../..  -I../helper
 
 ifeq ($(CLEANUP_TYPE),CPPXX)
 
